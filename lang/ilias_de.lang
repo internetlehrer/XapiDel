@@ -1,0 +1,9 @@
+content_types#:#XapiDel-Objekte
+obj_id#:#Objekt Id
+type_id#:#LRS-Typ
+act_id#:#Actor
+user_ident#:#Benutzer
+date_added#:#Hinzugefügt
+date_job_exec#:#Ausgeführt
+not_active_xxcf#:#Das Plugin XapiCmi5 ist nicht aktiv.
+

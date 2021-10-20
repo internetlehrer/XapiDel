@@ -1,0 +1,9 @@
+content_types#:#XapiDel-Objects
+obj_id#:#Object Id
+type_id#:#LRS-Type
+act_id#:#Actor
+user_ident#:#User
+date_added#:#Added
+date_job_exec#:#Executed
+not_active_xxcf#:#The Plugin XapiCmi5 is not active.
+
