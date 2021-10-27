@@ -1,6 +1,6 @@
-# xapidel ILIAS Plugin
+# XapiDel ILIAS Plugin
 
-Purpose: Automatic deletion of xAPI-Data for deleted xAPI-plugin-objects.
+Purpose: Automatic deletion of xAPI-Data for deleted xAPI-plugin-objects and for deleted users of xAPI-plugin-objects.
 
 This is an OpenSource project by internetlehrer GmbH, Bruchsal.
 
