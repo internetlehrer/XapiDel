@@ -19,7 +19,7 @@ Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/Cron/CronHook
 cd Customizing/global/plugins/Services/Cron/CronHook
-git clone https://github.com/internetlehrer/xapidel.git xapidel
+git clone https://github.com/internetlehrer/XapiDel
 ```
 
 Update, activate and config the plugin in the ILIAS Plugin Administration.
