@@ -9,8 +9,8 @@ use \ILIAS\DI\Container;
  */
 class ilXapiDelModel  {
 
-	CONST DB_XXCF_OBJ = 'xxcf_data_settings';
-    CONST DB_XXCF_USERS = 'xxcf_users';
+	CONST DB_TABLE_NAME = 'xxcf_settings';
+    CONST DB_USERS_TABLE_NAME = 'xxcf_users';
 
     CONST DB_DEL_OBJ = 'crnhk_xapidel_object';
     CONST DB_DEL_USERS = 'crnhk_xapidel_user';
@@ -42,7 +42,7 @@ class ilXapiDelModel  {
     {
         $data = null;
         $where = $this->db->quote($userId, 'integer');
-        $result = $this->db->query("SELECT obj_id FROM " . self::DB_XXCF_USERS . " WHERE usr_id = " . $where);
+        $result = $this->db->query("SELECT obj_id FROM " . self::DB_USERS_TABLE_NAME . " WHERE usr_id = " . $where);
         while( $row = $this->db->fetchAssoc($result) ) {
             if( is_null($data) ) {
                 $data = [];
@@ -85,9 +85,9 @@ class ilXapiDelModel  {
     public function getXapiObjectsByDeletedUsers(): array
     {
         $data = [];
-        $result = $this->db->query("SELECT obj.obj_id, obj.type_id, obj.activity_id, usr.usr_id, usr.usr_ident, del.added FROM " .
-            self::DB_XXCF_OBJ . " obj, " .
-            self::DB_XXCF_USERS . " usr, " .
+        $result = $this->db->query("SELECT obj.obj_id, obj.lrs_type_id, obj.activity_id, usr.usr_id, usr.usr_ident, del.added FROM " .
+            self::DB_TABLE_NAME . " obj, " .
+            self::DB_USERS_TABLE_NAME . " usr, " .
             self::DB_DEL_USERS . " del " .
             #" INNER JOIN " . self::DB_DEL_USERS . " del ON usr.usr_id = xdel.usr_id" .
             " WHERE usr.usr_id = del.usr_id AND obj.obj_id = usr.obj_id AND del.updated IS NULL");
@@ -103,11 +103,11 @@ class ilXapiDelModel  {
     public function getXapiObjectsByUser(int $userId): array
     {
         $data = [];
-        $result = $this->db->query("SELECT obj.obj_id, obj.type_id, obj.activity_id FROM " .
-            self::DB_XXCF_OBJ . " obj, " .
-            self::DB_XXCF_USERS . " usr" .
+        $result = $this->db->query("SELECT obj.obj_id, obj.lrs_type_id, obj.activity_id FROM " .
+            self::DB_TABLE_NAME . " obj, " .
+            self::DB_USERS_TABLE_NAME . " usr" .
             #" INNER JOIN " . self::DB_DEL_USERS . " del ON usr.usr_id = xdel.usr_id" .
-            " WHERE usr.usr_id = " . $this->db->quote($userId, 'integer'));
+            " WHERE usr.usr_id = " . $this->db->quote($userId, 'integer') . " AND obj.obj_id = usr.obj_id");
         while( $row = $this->db->fetchAssoc($result) ) {
             if( is_null($data) ) {
                 $data = [];
@@ -140,7 +140,7 @@ class ilXapiDelModel  {
     public function getXapiObjectData( int $objId ) {
         $data = null;
         $where = $this->db->quote($objId, 'integer');
-        $result = $this->db->query("SELECT type_id, activity_id FROM " . self::DB_XXCF_OBJ . " WHERE obj_id = " . $where);
+        $result = $this->db->query("SELECT lrs_type_id, activity_id FROM " . self::DB_TABLE_NAME . " WHERE obj_id = " . $where);
         while( $row = $this->db->fetchAssoc($result) ) {
             $data = $row;
         }

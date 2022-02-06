@@ -14,8 +14,8 @@ class ilXapiDelPlugin extends ilCronHookPlugin {
 	const PLUGIN_NAME = "XapiDel";
 	const PLUGIN_CLASS_NAME = ilXapiDelPlugin::class;
 
-	CONST DB_XXCF_OBJ = 'xxcf_data_settings';
-    CONST DB_XXCF_USERS = 'xxcf_users';
+	CONST DB_TABLE_NAME = 'xxcf_settings';
+    CONST DB_USERS_TABLE_NAME = 'xxcf_users';
 
     CONST DB_DEL_OBJ = 'crnhk_xapidel_object';
 	CONST DB_DEL_USERS = 'crnhk_xapidel_user';
@@ -102,11 +102,11 @@ class ilXapiDelPlugin extends ilCronHookPlugin {
 			if ($delete == true) {
 				require_once(__DIR__ . '/class.ilXapiDelModel.php');
 				$model = ilXapiDelModel::init();
-				$objId = (!$this->deleteToTrash) ? (int) $parameters['object']->getId() : (int) $parameters['obj_id']; 
+				$objId = (!$this->deleteToTrash) ? (int) $parameters['object']->getId() : (int) $parameters['obj_id'];
 				$xapiObject = $model->getXapiObjectData($objId);
 				if( !is_null($xapiObject) ) {
 					// add obj as deleted
-					$model->setXapiObjAsDeleted($objId, $xapiObject['type_id'], $xapiObject['activity_id']);
+					$model->setXapiObjAsDeleted($objId, $xapiObject['lrs_type_id'], $xapiObject['activity_id']);
 				}
 			}
         }

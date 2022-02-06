@@ -2,7 +2,7 @@
 
 /* Copyright (c) 1998-2019 ILIAS open source, Extended GPL, see docs/LICENSE */
 
-require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/XapiCmi5/classes/class.ilXapiCmi5Type.php');
+require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/XapiCmi5/classes/class.ilXapiCmi5LrsType.php');
 require_once('./Customizing/global/plugins/Services/Repository/RepositoryObject/XapiCmi5/classes/XapiDelete/class.ilXapiCmi5StatementsDeleteRequest.php');
 require_once __DIR__.'/class.ilXapiDelModel.php';
 
@@ -17,7 +17,7 @@ class ilXapiDelCron extends ilCronJob
 	const JOB_ID = 'xapidel';
 	
 	/**
-	 * @var ilXapiCmi5Type|null
+	 * @var ilXapiCmi5LrsType|null
 	 */
     protected $lrsType;
     
@@ -33,7 +33,7 @@ class ilXapiDelCron extends ilCronJob
 		
 		if( $lrsTypeId )
 		{
-			$this->lrsType = new ilXapiCmi5Type($lrsTypeId);
+			$this->lrsType = new ilXapiCmi5LrsType($lrsTypeId);
 		}
 		else
 		{
@@ -251,7 +251,7 @@ class ilXapiDelCron extends ilCronJob
 				}
 				$deleteRequest = new ilXapiCmi5StatementsDeleteRequest(
 					(int) $xapiObject['obj_id'],
-					(int) $xapiObject['type_id'],
+					(int) $xapiObject['lrs_type_id'],
 					(string) $xapiObject['activity_id'],
 					$usrId,
 					ilXapiCmi5StatementsDeleteRequest::DELETE_SCOPE_OWN
